@@ -5,7 +5,7 @@
 	"version":"0.1.0",
 	"description": "Chat desarrolado en Node.js",
 	"main": "app.js",
-	"author":"Mario Perez Esteso <mario@geekytheory.com>",
+	"author":"Gonzalo Jordan<gonzalowtf@gmail.com>",
 	"dependencies": {
 	      
 
