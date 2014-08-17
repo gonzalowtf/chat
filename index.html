@@ -1,0 +1,162 @@
+<html><head>
+
+				<title>Chat</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src ="https://code.jquery.com/jquery.js"></script>
+
+
+
+</head>
+<style>
+#chat{
+
+
+
+	position: relative;
+	width : 100%;
+	float: left;
+	min-height: 100%;
+	height: 90%;
+	overflow:auto ;
+}
+
+
+</style>
+<body>
+
+
+	<div class ="container">
+			<div class ="page-header">
+					<h1>Chat Dessarrolado En Node.js <small>(solo de prueba)</small></h1>
+
+				</div>
+
+           <div id ="content" class ="row" style ="height: 70%;">
+                   <div class ="col-md-2"></div>
+
+                   <div id ="chatContent" class ="col-md-6">
+                             <div class ="panel panel-success"><div class ="panel-heading">Chat</div>
+
+                             <div id ="chat" class ="panel-body"></div>
+                             </div>
+
+            <div>
+
+                <input id ="nombre" type="text" class ="form-control" placeholder="Tu Nombre...."></input>
+
+            	<form id ="sendMessenge" class ="input-group" style ="text-align:center; margin:0 auto;">
+            	
+
+
+<span class ="input-group-btn">
+<input id ="messenge" class = "form-control input-lg" type ="text"></input>
+
+<button class ="btn btn-lg btn-primary" type ="submit">
+
+
+
+Send
+</button>
+
+
+</span>
+
+
+</form>
+														</div>
+
+
+								</div>
+			</div>
+
+
+</div>
+
+
+<script src ="/socket.io/socket.io.js"></script>
+
+
+<script>
+function color(){ 
+   var hexadecimal = new Array("0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"); 
+   var color_aleatorio = "#"; 
+   var posarray=0;
+   
+   for (i=0;i<6;i++){ 
+      posarray = aleatorio(0,hexadecimal.length); 
+      color_aleatorio += hexadecimal[posarray]; 
+   } 
+   return color_aleatorio; 
+}
+
+// numero aleatorio: var n =Math.floor(Math.random() * (16-1+1)) + 1;
+
+
+function aleatorio(inferior,superior){ 
+   numPosibilidades = superior - inferior; 
+   aleat = Math.random() * numPosibilidades; 
+   aleat = Math.floor(aleat); 
+   return parseInt(inferior) + aleat; 
+}
+
+
+var c = color();
+ 
+ jQuery(function($){
+
+
+ 	var socket = io.connect();
+ 	var $userName =$('#nombre');
+ 	var $messengeForm = $('#sendMessenge');
+ 	var $messenge = $('#messenge');
+ 	var $chat = $('#chat');
+    
+ 
+$messengeForm.submit(function(e){
+
+
+
+
+ e.preventDefault();
+ 
+ if($messenge.val()!=='') socket.emit('sendMessenge' , '<i style ="color:'+c+'">'+$userName.val()+'</i>: '+$messenge.val());
+ $messenge.val('');
+
+});
+
+
+socket.on('newMessenge', function(data){
+
+
+ 
+ 	$chat.append(' - '+data.msg + "<br>");
+	
+	
+	
+	
+});
+
+
+
+
+ });
+
+</script>
+
+
+
+
+
+</body>
+
+
+
+</html>
